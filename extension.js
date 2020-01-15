@@ -20,8 +20,16 @@ function activate(context) {
 	let disposable = vscode.commands.registerCommand('extension.nvmNodeInclude', function () {
 		// The code you place here will be executed every time your command is executed
 
-    // Display a message box to the user
-    return Promise.resolve('/home/bruce/.nvm/versions/node/v12.13.0/bin/node');
+        // just return out best guess as to the include directory for this version
+        // of node. presume NVM_BIN var points to bin if it exists. if not, presume
+        // /usr/local/include/node. no, it's not sophisticated.
+        let includePath;
+        if (process.env.NVM_BIN) {
+            includePath = process.env.NVM_BIN.replace(/\/bin$/, '/include');
+        } else {
+            includePath = '/usr/local/include/node';
+        }
+        return Promise.resolve(includePath);
 		//vscode.window.showInformationMessage('nvmNodeInclude active');
 	});
 
