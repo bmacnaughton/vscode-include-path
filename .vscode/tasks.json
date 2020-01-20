@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo nvmNodeInclude",
+            "label": "echo nvmNodeInclude path",
             "type": "shell",
             "command": "echo ${command:extension.nvmNodeInclude}",
             "problemMatcher": []
